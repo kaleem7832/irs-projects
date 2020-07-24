@@ -52,7 +52,7 @@ export default function MaterialTableDemo() {
   var [projects, setProjects] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8000/projects")
+      .get("/projects")
       .then((response) => {
         setProjects(response.data.reverse());
         console.log(projects);
