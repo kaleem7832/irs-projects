@@ -42,7 +42,7 @@ export default function MaterialTableDemo(props) {
   useEffect(() => {
     axios
       .get(
-        "http://localhost:4000/tasks/history/" + props.location.rowData.project
+        "http://localhost:8000/tasks/history/" + props.location.rowData.project
       )
       .then((response) => {
         setTasks(response.data.reverse());
@@ -89,11 +89,11 @@ export default function MaterialTableDemo(props) {
               newData = { ...newData, project: props.location.rowData.project };
 
               axios
-                .post("http://localhost:4000/tasks/add", newData)
+                .post("http://localhost:8000/tasks/add", newData)
                 .then((res) =>
                   axios
                     .get(
-                      "http://localhost:4000/tasks/history/" +
+                      "http://localhost:8000/tasks/history/" +
                         props.location.rowData.project
                     )
                     .then((response) => {
@@ -110,13 +110,13 @@ export default function MaterialTableDemo(props) {
               if (oldData) {
                 axios
                   .post(
-                    "http://localhost:4000/tasks/update/" + oldData._id,
+                    "http://localhost:8000/tasks/update/" + oldData._id,
                     newData
                   )
                   .then((res) =>
                     axios
                       .get(
-                        "http://localhost:4000/tasks/history/" +
+                        "http://localhost:8000/tasks/history/" +
                           props.location.rowData.project
                       )
                       .then((response) => {
@@ -139,11 +139,11 @@ export default function MaterialTableDemo(props) {
                 //return false;
               }
               axios
-                .get("http://localhost:4000/tasks/delete/" + oldData._id)
+                .get("http://localhost:8000/tasks/delete/" + oldData._id)
                 .then((res) =>
                   axios
                     .get(
-                      "http://localhost:4000/tasks/history/" +
+                      "http://localhost:8000/tasks/history/" +
                         props.location.rowData.project
                     )
                     .then((response) => {
