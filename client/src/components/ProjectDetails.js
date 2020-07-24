@@ -41,9 +41,7 @@ export default function MaterialTableDemo(props) {
 
   useEffect(() => {
     axios
-      .get(
-        "http://localhost:8000/tasks/history/" + props.location.rowData.project
-      )
+      .get("/tasks/history/" + props.location.rowData.project)
       .then((response) => {
         setTasks(response.data.reverse());
         console.log(tasks);
@@ -88,37 +86,26 @@ export default function MaterialTableDemo(props) {
               newData = { ...newData, date: today };
               newData = { ...newData, project: props.location.rowData.project };
 
-              axios
-                .post("http://localhost:8000/tasks/add", newData)
-                .then((res) =>
-                  axios
-                    .get(
-                      "http://localhost:8000/tasks/history/" +
-                        props.location.rowData.project
-                    )
-                    .then((response) => {
-                      setTasks(response.data.reverse());
-                    })
-                    .catch(function (error) {
-                      console.log(error);
-                    })
-                );
+              axios.post("/tasks/add", newData).then((res) =>
+                axios
+                  .get("/tasks/history/" + props.location.rowData.project)
+                  .then((response) => {
+                    setTasks(response.data.reverse());
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  })
+              );
             }),
           onRowUpdate: (newData, oldData) =>
             new Promise((resolve) => {
               resolve();
               if (oldData) {
                 axios
-                  .post(
-                    "http://localhost:8000/tasks/update/" + oldData._id,
-                    newData
-                  )
+                  .post("/tasks/update/" + oldData._id, newData)
                   .then((res) =>
                     axios
-                      .get(
-                        "http://localhost:8000/tasks/history/" +
-                          props.location.rowData.project
-                      )
+                      .get("/tasks/history/" + props.location.rowData.project)
                       .then((response) => {
                         setTasks(response.data.reverse());
                       })
@@ -139,13 +126,10 @@ export default function MaterialTableDemo(props) {
                 //return false;
               }
               axios
-                .get("http://localhost:8000/tasks/delete/" + oldData._id)
+                .get("/tasks/delete/" + oldData._id)
                 .then((res) =>
                   axios
-                    .get(
-                      "http://localhost:8000/tasks/history/" +
-                        props.location.rowData.project
-                    )
+                    .get("/tasks/history/" + props.location.rowData.project)
                     .then((response) => {
                       setTasks(response.data.reverse());
                     })
