@@ -70,7 +70,7 @@ export default class CreateProject extends Component {
 
     obj = { ...obj, date: today };
 
-    axios.post("http://localhost:4000/projects/add", obj).then((res) => {
+    axios.post("/projects/add", obj).then((res) => {
       this.setState({ open: true });
       setTimeout(() => {
         this.setState({ open: false });
