@@ -22,7 +22,7 @@ class App extends Component {
                 </div>
                 <div className="col">
                   <div className="float-right ">
-                    <Link className="btn text-white m-2" to={"/"}>
+                    <Link className="btn text-white m-2 border-light" to={"/"}>
                       Home
                     </Link>
                   </div>
