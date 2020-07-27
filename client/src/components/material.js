@@ -40,7 +40,7 @@ var columns = [
     render: (rowData) => (
       <Link to={{ pathname: "/details", rowData }}>
         <Button variant="contained" color="primary" className="float-right">
-          Open
+          Edit
         </Button>
       </Link>
     ),
