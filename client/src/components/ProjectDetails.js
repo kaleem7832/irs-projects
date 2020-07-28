@@ -63,6 +63,7 @@ export default function MaterialTableDemo(props) {
       <MaterialTable
         title="Task History"
         columns={columns}
+        tableLayout="auto"
         data={tasks}
         options={{ actionsColumnIndex: -1, addRowPosition: "first" }}
         editable={{
