@@ -21,7 +21,7 @@ let Project = new Schema(
       type: String,
       required: true,
     },
-    date: {
+    startdate: {
       type: String,
       required: true,
     },

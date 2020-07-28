@@ -20,9 +20,13 @@ let Task = new Schema(
       type: String,
       required: true,
     },
-    date: {
+    startdate: {
       type: String,
       required: true,
+    },
+    enddate: {
+      type: String,
+      //required: true,
     },
   },
   {

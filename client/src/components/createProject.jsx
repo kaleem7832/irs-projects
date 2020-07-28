@@ -65,10 +65,23 @@ export default class CreateProject extends Component {
 
     var date = new Date();
 
-    var today =
-      date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+    // var today =
+    //   date.getDate() +
+    //   "." +
+    //   (date.getMonth() + 1) +
+    //   "." +
+    //   date.getFullYear() +
+    //   " " +
+    //   date.getHours() +
+    //   ":" +
+    //   date.getMinutes() +
+    //   ":" +
+    //   date.getSeconds();
+    var today = new Date(
+      new Date().toString().split("GMT")[0] + " UTC"
+    ).toISOString();
 
-    obj = { ...obj, date: today };
+    obj = { ...obj, startdate: today };
 
     axios.post("/projects/add", obj).then((res) => {
       this.setState({ open: true });

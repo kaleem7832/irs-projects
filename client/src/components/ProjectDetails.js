@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 
 var columns = [
-  { title: "Date", field: "date", editable: "never" },
   {
     title: "Programmer",
     field: "programmer",
@@ -22,6 +21,8 @@ var columns = [
     },
   },
   { title: "Task", field: "task" },
+  { title: "Start Date", field: "startdate", type: "datetime" },
+  { title: "End Date", field: "enddate", type: "datetime" },
   {
     title: "Status",
     field: "status",
@@ -58,11 +59,6 @@ export default function MaterialTableDemo(props) {
         <span className="text-primary">{props.location.rowData.project}</span>
       </h4>
       <hr className="hr"></hr>
-      <p>
-        Last task <b>{props.location.rowData.task}</b> done by{" "}
-        <b>{props.location.rowData.programmer}</b> and status :{" "}
-        <b>{props.location.rowData.status}</b>
-      </p>
 
       <MaterialTable
         title="Task History"
@@ -76,14 +72,11 @@ export default function MaterialTableDemo(props) {
 
               var date = new Date();
 
-              var today =
-                date.getDate() +
-                "/" +
-                (date.getMonth() + 1) +
-                "/" +
-                date.getFullYear();
+              var today = new Date(
+                new Date().toString().split("GMT")[0] + " UTC"
+              ).toISOString();
 
-              newData = { ...newData, date: today };
+              newData = { ...newData, startdate: today };
               newData = { ...newData, project: props.location.rowData.project };
 
               axios.post("/tasks/add", newData).then((res) =>

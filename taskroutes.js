@@ -45,6 +45,8 @@ taskRoutes.route("/update/:id").post(function (req, res) {
       task.status = req.body.status;
       task.programmer = req.body.programmer;
       task.task = req.body.task;
+      task.enddate = req.body.enddate;
+      task.startdate = req.body.startdate;
       task
         .save()
         .then((task) => {
