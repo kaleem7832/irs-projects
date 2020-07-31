@@ -20,7 +20,18 @@ var columns = [
       Kaleem: "Kaleem",
     },
   },
-  { title: "Task", field: "task" },
+  {
+    title: "Task",
+    field: "task",
+    cellStyle: {
+      width: 300,
+      maxWidth: 300,
+    },
+    headerStyle: {
+      width: 300,
+      maxWidth: 300,
+    },
+  },
   { title: "Start Date", field: "startdate", type: "datetime" },
   { title: "End Date", field: "enddate", type: "datetime" },
   {
@@ -63,7 +74,6 @@ export default function MaterialTableDemo(props) {
       <MaterialTable
         title="Task History"
         columns={columns}
-        tableLayout="auto"
         data={tasks}
         options={{ actionsColumnIndex: -1, addRowPosition: "first" }}
         editable={{

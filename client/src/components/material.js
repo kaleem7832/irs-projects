@@ -75,7 +75,10 @@ export default function MaterialTableDemo() {
         title="Project tracker"
         columns={columns}
         data={projects}
-        options={{ actionsColumnIndex: -1, addRowPosition: "first" }}
+        options={{
+          actionsColumnIndex: -1,
+          addRowPosition: "first",
+        }}
         // editable={{
         //   onRowAdd: (newData) =>
         //     new Promise((resolve) => {

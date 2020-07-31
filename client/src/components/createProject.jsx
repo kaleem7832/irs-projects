@@ -22,7 +22,9 @@ export default class CreateProject extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      open: false,
+      success: false,
+      failure: false,
+      exsist: false,
       date: "",
       project: "",
       task: "",
@@ -83,12 +85,22 @@ export default class CreateProject extends Component {
 
     obj = { ...obj, startdate: today };
 
-    axios.post("/projects/add", obj).then((res) => {
-      this.setState({ open: true });
-      setTimeout(() => {
-        this.setState({ open: false });
-      }, 5000);
-    });
+    axios
+      .post("/projects/add", obj)
+      .then((res) => {
+        this.setState({ success: true });
+        setTimeout(() => {
+          this.setState({ success: false });
+        }, 5000);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+        this.setState({ failure: true });
+        setTimeout(() => {
+          this.setState({ failure: false });
+        }, 5000);
+      });
     this.setState({
       date: "",
       project: "",
@@ -109,6 +121,7 @@ export default class CreateProject extends Component {
               <TextField
                 id="project-name"
                 label="Project Name"
+                required="true"
                 onChange={this.onChangeProject}
                 value={this.state.project}
               />
@@ -118,6 +131,7 @@ export default class CreateProject extends Component {
               <TextField
                 id="project-task"
                 label="Task"
+                required="true"
                 onChange={this.onChangeTask}
                 value={this.state.task}
               />
@@ -128,6 +142,7 @@ export default class CreateProject extends Component {
               <Select
                 labelId="programmer"
                 id="programmer"
+                required="true"
                 onChange={this.onChangeProgrammer}
                 value={this.state.programmer}
               >
@@ -143,6 +158,7 @@ export default class CreateProject extends Component {
               <Select
                 labelId="status"
                 id="status"
+                required="true"
                 onChange={this.onChangeStatus}
                 value={this.state.status}
               >
@@ -166,12 +182,21 @@ export default class CreateProject extends Component {
         </form>
 
         <Snackbar
-          open={this.state.open}
+          open={this.state.success}
           autoHideDuration={3000}
           anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         >
           <Alert severity="success" className="alert alert-primary">
             Project added successfully
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={this.state.failure}
+          autoHideDuration={3000}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        >
+          <Alert severity="error" className="alert alert-danger">
+            Unable to add project. Please try again.
           </Alert>
         </Snackbar>
       </div>
